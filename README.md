@@ -31,58 +31,49 @@ including loop-based computation.
 | Register Address Width | 2 bits |
 | Endianness | Little Endian | 
 
-## Network Model
+## Instruction Set Architecture (ISA)
 
-* **Topology:** Star
-* **Message Delay:** 1 unit of distance = 1 unit of simulation time
-* **RTT Calculation:** RTT = time received - time sent
-* **Assumptions:**
-  * Host only pings one destination
-  * Ping interval is always greater than RTT
-  * Input file is complete and valid
-  * Event processing order is time based
+* Custom-designed 23-bit instruction format
+* Supports: arithmetic operations, immediate-based instructions, control flow and branching
+* Inspired by RISC-style architectures
+* Instruction Fields: Opcode (5 bits), Register Operands (2-bit addressing), Immediate Field (12 bits)
 
-## How the Simulation Works
+## Processor Design
 
-* Read input file
-* Create hosts and neighbor relationships
-* Bootstrap ping events
-* Run simulation loop
-  * Pop next event from the FutureEventList
-  * Call handle() on the event
-  * Continue until no events remain 
+* Multicycle Architecture: Instruction Fetch, Decode, Execute, Memory Access, Write-Back
+* Reduces Hardware Complexity by reusing functional units across cycles
+* Control logic implemented via finite state machines
+* Implemented Modules: Instruction Decoder, Register File (4 x 24-bit), ALU, Program Counter and Control Logic, Instruction Memory, Data Memory, Control Unit
+* All modules are written in synthesizable Verilog and tested via simulation
+
+## Supported Programs
+
+### Arithmetic Operation 
+
+``` C = A + B' ```
+
+### Loop-Based Accumulation
+
+```
+int sum = 0;
+for (i = 0; i <=10; i++) {
+ sum += i;
+}
+```
 
 ## Sample Input
-```
-5
-6 2
-7 3
--1
-5 7 10 28
-```
-* First number is the central host address
-* Following lines are of the format: ```<neighbor address> <distance>```
-* -1 terminates list of neighbors
-* Following lines are of the format: ```<source> <destination> <interval> <duration>```
+
+TO BE UPDATED
 
 ## Sample Output
-```
-[10ts] Host 5: Sent ping to host 7
-[13ts] Host 7: Ping request from host 5
-[16ts] Host 5: Ping response from host 7 (RTT = 6ts)
-[20ts] Host 5: Sent ping to host 7
-[23ts] Host 7: Ping request from host 5
-[26ts] Host 5: Ping response from host 7 (RTT = 6ts)
-[28ts] Host 5: Stopped sending pings
-```
-* ```ts```= simulation time units
-* Output ordering may differ when multiple events occur at the same time
 
-## How to Run
+TO BE UPDATED
 
-* Place ```simulation.txt``` in the project root directory.
-* Compile: ```javac *.java```
-* Run: ```java Main```
+## Simulation and Testing
+
+* Simulated using EDA Playground.
+* Instruction memory initialized with machine code starting at address 0x400
+* Waveforms inspected to verify correct state transitions, register updates, program counter behavior, instruction execution timing.
 
 ## Possible Extensions
 
