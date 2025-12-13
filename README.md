@@ -50,7 +50,7 @@ including loop-based computation.
 
 ### Arithmetic Operation 
 
-``` C = A + B' ```
+``` C = A + B ```
 
 ### Loop-Based Accumulation
 
