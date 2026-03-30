@@ -1,14 +1,14 @@
-# Multicycle Processor 
+# Processors 
 
 **Course:** CE 4304 - Computer Architecture\
 **Semester:** Spring 2024\
-**Project:** Multicycle Processor (Harvard Architecture)\
+**Project:** Processors (Harvard Architecture)\
 **Language:** Verilog
 
 ## Overview
 
 This project involves the design and implementation of a custom Instruction Set Architecture (ISA) 
-and a multi-cycle processor that executes it. The processor is tailored for embedded systems and 
+and a single-cycle, multi-cycle, and pipelined processor that executes it. The processor is tailored for embedded systems and 
 follows a Harvard architecture, with separate instruction and data memories. The project was completed in 
 two phases: 1) ISA design and specification 2) processor implementation and simulation in Verilog. The final
 design is capable of executing arithmetic operations and control-flow logic required to run simple programs, 
@@ -37,14 +37,6 @@ including loop-based computation.
 * Supports: arithmetic operations, immediate-based instructions, control flow and branching
 * Inspired by RISC-style architectures
 * Instruction Fields: Opcode (5 bits), Register Operands (2-bit addressing), Immediate Field (12 bits)
-
-## Processor Design
-
-* Multicycle Architecture: Instruction Fetch, Decode, Execute, Memory Access, Write-Back
-* Reduces Hardware Complexity by reusing functional units across cycles
-* Control logic implemented via finite state machines
-* Implemented Modules: Instruction Decoder, Register File (4 x 24-bit), ALU, Program Counter and Control Logic, Instruction Memory, Data Memory, Control Unit
-* All modules are written in synthesizable Verilog and tested via simulation
 
 ## Supported Programs
 
